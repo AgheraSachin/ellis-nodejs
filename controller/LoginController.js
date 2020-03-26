@@ -7,7 +7,7 @@ module.exports = {
     index: function (req, res) {
         var decoded = localStorage.getItem('loginToken');
         if (decoded) {
-            res.redirect('home');
+            return res.redirect('home');
         }
         res.render('index.ejs', {errors: ''})
     },

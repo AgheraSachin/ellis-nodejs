@@ -1,9 +1,15 @@
 const {validationResult} = require('express-validator');
+var jwt = require('jsonwebtoken');
 var UserModel = require('../model/Users')
 module.exports = {
 
     index: function (req, res) {
-        res.render("signup", {errors: ''});
+        var decoded = localStorage.getItem('loginToken');
+        if (decoded) {
+            return res.redirect('home');
+        }
+
+        res.render("signup.ejs", {errors: ''});
     },
     signUp: function (req, res) {
         const errors = validationResult(req);
@@ -20,6 +26,8 @@ module.exports = {
         }).save(function (err, result) {
             if (err) throw err;
             if (result) {
+                var token = jwt.sign({username: result.email}, 'loginToken');
+                localStorage.setItem('loginToken', token);
                 res.render('home');
             }
         })
