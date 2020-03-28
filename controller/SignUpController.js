@@ -28,6 +28,7 @@ module.exports = {
             if (result) {
                 var token = jwt.sign({username: result.email}, 'loginToken');
                 localStorage.setItem('loginToken', token);
+                localStorage.setItem('authUser', result);
                 res.render('home');
             }
         })

@@ -8,6 +8,8 @@ var SignUpValidator = require('../validation/SignUpValidation');
 
 var LoginController = require('../controller/LoginController');
 var SignUpController = require('../controller/SignUpController');
+var HomeController = require('../controller/HomeController');
+var CategoryController = require('../controller/CategoryController');
 
 /* GET home page. */
 router.get('/', LoginController.index);
@@ -17,9 +19,10 @@ router.get('/logout', LoginController.logout);
 router.get('/signup', SignUpController.index);
 router.post('/signup', SignUpValidator.signup, SignUpController.signUp);
 
-router.get('/home', authMiddleware.auth, (req, res) => {
-    res.render('home');
-})
+router.get('/home', authMiddleware.auth, HomeController.index);
+
+router.get('/add-category', authMiddleware.auth, CategoryController.create);
+router.get('/list-category', authMiddleware.auth, CategoryController.index);
 
 
 module.exports = router;

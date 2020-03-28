@@ -23,6 +23,7 @@ module.exports = {
             if (data.length > 0) {
                 var token = jwt.sign({username: data[0].email}, 'loginToken');
                 localStorage.setItem('loginToken', token);
+                localStorage.setItem('authUser', JSON.stringify(data[0]));
                 res.redirect('home');
             } else {
                 res.render('index.ejs', {errors: [{'msg': 'Invalid Username or Password.'}]});
