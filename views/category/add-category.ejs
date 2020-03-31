@@ -9,11 +9,22 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <%
+            if(errors.length > 0){
+                    for(error of errors){
+            %>
+                <li class="list-group-item-danger"><%= error.msg %> </li>
+            <%
+            }
+            }
+            %>
+            <form method="post" action="add-category">
                 <div class="box-body">
+                    <label>Category</label>
                     <div class="form-group">
-                        <label>Category</label>
-                        <input type="text" class="form-control" id="category" name="category"
+                        <input type="text"
+                               class="form-control"
+                               id="category" name="category"
                                placeholder="Enter category">
                     </div>
                 </div>

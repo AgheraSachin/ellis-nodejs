@@ -5,6 +5,7 @@ var authMiddleware = require('../middleware/auth');
 
 var LoginValidator = require('../validation/LoginValidation');
 var SignUpValidator = require('../validation/SignUpValidation');
+var CategoryValidator = require('../validation/CategoryValidation');
 
 var LoginController = require('../controller/LoginController');
 var SignUpController = require('../controller/SignUpController');
@@ -22,7 +23,9 @@ router.post('/signup', SignUpValidator.signup, SignUpController.signUp);
 router.get('/home', authMiddleware.auth, HomeController.index);
 
 router.get('/add-category', authMiddleware.auth, CategoryController.create);
+router.post('/add-category', authMiddleware.auth, CategoryValidator.add_category, CategoryController.store);
 router.get('/list-category', authMiddleware.auth, CategoryController.index);
+router.get('/get-all-categories', authMiddleware.auth, CategoryController.show);
 
 
 module.exports = router;

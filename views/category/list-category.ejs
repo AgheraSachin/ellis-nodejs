@@ -1,7 +1,37 @@
 <%- include('../layout/common') %>
 <%- include('../layout/header') %>
 <div class="content-wrapper">
-    <h1>List Category</h1>
+    <div class="">
+        <h1>List Category</h1>
+        <table id="example" class="display" style="width:100%">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').DataTable({
+            pageLength: 5,
+            bLengthChange: false, //thought this line could hide the LengthMenu
+            bInfo: false,
+            scrollY: 400,
+            ajax: "/get-all-categories",
+            columns: [{
+                "data": "_id",
+            }, {
+                "data": "name",
+            }
+            ]
+        });
+    });
+</script>
 <%- include('../layout/footer') %>
