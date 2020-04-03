@@ -29,6 +29,9 @@ router.get('/add-category', authMiddleware.auth, CategoryController.create);
 router.post('/add-category', authMiddleware.auth, CategoryValidator.add_category, CategoryController.store);
 router.get('/list-category', authMiddleware.auth, CategoryController.index);
 router.get('/get-all-categories', authMiddleware.auth, CategoryController.show);
+router.get('/edit-category/:id', authMiddleware.auth, CategoryController.edit);
+router.post('/edit-category/:id', authMiddleware.auth,CategoryValidator.add_category,CategoryController.update);
+router.get('/delete-category/:id', authMiddleware.auth, CategoryController.delete);
 
 /* Article*/
 router.get('/add-article', authMiddleware.auth, ArticleController.create);

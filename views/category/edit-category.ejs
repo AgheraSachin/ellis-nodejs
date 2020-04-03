@@ -1,0 +1,43 @@
+<%- include('../layout/common') %>
+<%- include('../layout/header') %>
+<div class="content-wrapper">
+    <div class="col-md-5 ml-5 pt-3">
+        <!-- general form elements -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Edit Category</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <%
+            if(errors.length > 0){
+                    for(error of errors){
+            %>
+                <li class="list-group-item-danger"><%= error.msg %> </li>
+            <%
+            }
+            }
+            %>
+            <form method="post" action="<%= category._id %>">
+                <div class="box-body">
+                    <label>Category</label>
+                    <div class="form-group">
+                        <input type="text"
+                               class="form-control"
+                               id="category" name="category"
+                               value="<%= category.name %>"
+                               placeholder="Enter category">
+                    </div>
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+<%- include('../layout/footer') %>

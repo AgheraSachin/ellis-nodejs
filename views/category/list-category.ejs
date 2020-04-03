@@ -8,6 +8,7 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -25,11 +26,17 @@
             bInfo: false,
             scrollY: 400,
             ajax: "/get-all-categories",
-            columns: [{
-                "data": "_id",
-            }, {
-                "data": "name",
-            }
+            columns: [
+                {
+                    data: "_id",
+                }, {
+                    data: "name",
+                },
+                {
+                    "render": function ( data, type, row ) {
+                        return '<a href="/edit-category/'+row._id+'" class="editor_edit">Edit</a> | <a href="/delete-category/'+row._id+'" class="editor_edit">Delete</a>';
+                    },
+                }
             ]
         });
     });
