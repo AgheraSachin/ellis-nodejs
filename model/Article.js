@@ -14,7 +14,8 @@ const ArticleSchema = new Schema({
         index: true
     },
     category: {
-        type: Schema.Types.Mixed,
+        type: Schema.Types.ObjectId,
+        ref: 'categories',
         required: true,
         index: true
     },

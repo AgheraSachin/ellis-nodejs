@@ -37,6 +37,8 @@ router.get('/delete-category/:id', authMiddleware.auth, CategoryController.delet
 router.get('/add-article', authMiddleware.auth, ArticleController.create);
 router.get('/list-article', authMiddleware.auth, ArticleController.index);
 router.post('/add-article', authMiddleware.auth, ArticleValidator.add_article, ArticleController.store);
+router.get('/get-all-articles', authMiddleware.auth, ArticleController.show);
+router.get('/delete-article/:id', authMiddleware.auth, ArticleController.delete);
 
 
 module.exports = router;

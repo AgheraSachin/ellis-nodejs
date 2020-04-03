@@ -23,6 +23,19 @@ module.exports = {
             });
         }
         let requestedFile = req.files.logo;
+        if (requestedFile.size > 1024000) {
+            module.exports.getCategory().then(function (result) {
+                res.render('articles/add-article', {categories: result, errors: [{"msg": "file is too large."}]});
+            });
+            return false;
+        }
+        var imageType = ['image/png', 'image/jpeg'];
+        if (!imageType.includes(requestedFile.mimetype)) {
+            module.exports.getCategory().then(function (result) {
+                res.render('articles/add-article', {categories: result, errors: [{"msg": "file is not supported."}]});
+            });
+            return false;
+        }
         requestedFile.mv('public/upload/' + requestedFile.name, function (err) {
             if (err) {
                 module.exports.getCategory().then(function (result) {
@@ -41,6 +54,18 @@ module.exports = {
                     }
                 })
             }
+        });
+    },
+    show: function (req, res) {
+        ArticleModel.find().populate('category').exec(function (err, result) {
+            if (err) return handleError(err);
+            res.json({'data': result});
+        });
+    },
+    delete: function (req, res) {
+        ArticleModel.deleteOne({'_id': req.params.id}, function (err, result) {
+            if (err) return handleError(err);
+            res.redirect('/list-article');
         });
     },
     getCategory: function () {
